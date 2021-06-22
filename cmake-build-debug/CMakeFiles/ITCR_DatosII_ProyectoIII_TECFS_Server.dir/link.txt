@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/ITCR_DatosII_ProyectoIII_TECFS_Server.dir/src/C++/main.cpp.o CMakeFiles/ITCR_DatosII_ProyectoIII_TECFS_Server.dir/src/C++/TcpServer.cpp.o  -o ITCR_DatosII_ProyectoIII_TECFS_Server 
