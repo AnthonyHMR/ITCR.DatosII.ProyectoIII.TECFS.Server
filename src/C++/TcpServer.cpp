@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -88,8 +89,6 @@ int TcpServer::runServer() {
         // Display message
         getMessage();
 
-        // Send message
-        sendMessage("message");
     }
 
     // Close socket
@@ -97,14 +96,17 @@ int TcpServer::runServer() {
 }
 
 void TcpServer::getMessage() {
-    cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+    ofstream book;
+    string name = "book1.txt";
+    book.open(path.append(name));
+    book << string(buf, 0, bytesRecv);
+    //cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+    book.close();
 
 }
 
 void TcpServer::sendMessage(string message) {
-    // Enter lines of text
-    cout << "> ";
-    getline(cin, message);
+
 
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {

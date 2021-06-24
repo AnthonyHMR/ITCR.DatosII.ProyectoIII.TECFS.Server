@@ -18,6 +18,7 @@ private:
     char buf[4096];
     int clientSocket;
     int bytesRecv;
+    string path= "/home/juanpr/Escritorio/TEC/ITCR.DatosII.ProyectoIII.TECFS.Server/src/Books/";
 };
 
 #endif //ITCR_DATOSII_PROYECTOIII_TECFS_SERVER_TCPSERVER_H
