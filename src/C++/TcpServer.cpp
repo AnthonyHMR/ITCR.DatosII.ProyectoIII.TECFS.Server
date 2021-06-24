@@ -97,12 +97,12 @@ int TcpServer::runServer() {
 
 void TcpServer::getMessage() {
     ofstream book;
-    string name = "book1.txt";
-    book.open(path.append(name));
+    string name = "book" + to_string(count) + ".txt";
+    book.open(path + name);
     book << string(buf, 0, bytesRecv);
     //cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
     book.close();
-
+    count++;
 }
 
 void TcpServer::sendMessage(string message) {
