@@ -105,9 +105,13 @@ void TcpServer::getMessage() {
     book << string(buf, 0, bytesRecv);
     book.close();
     ;*/
-    //cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
-    this->controllerNode->receiveBook(Query, name, meta_file);
-    count++;
+    json query = json::parse(Query);
+    if (query.contains("Search")) {
+        cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+    }else {
+        this->controllerNode->receiveBook(Query, name, meta_file);
+        count++;
+    }
 }
 
 void TcpServer::sendMessage(string message) {
