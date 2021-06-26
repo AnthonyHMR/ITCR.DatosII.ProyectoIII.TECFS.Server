@@ -96,12 +96,17 @@ int TcpServer::runServer() {
 }
 
 void TcpServer::getMessage() {
-    ofstream book;
-    string name = "book" + to_string(count) + ".txt";
+    string name = path + "book" + to_string(count) + ".txt";
+    string meta_file = metadata_path + "bookInfo"+ to_string(count) + ".json";
+    string Query = string(buf, 0, bytesRecv);
+    /*ofstream book;
+
     book.open(path + name);
     book << string(buf, 0, bytesRecv);
-    //cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
     book.close();
+    ;*/
+    //cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+    this->controllerNode->receiveBook(Query, name, meta_file);
     count++;
 }
 

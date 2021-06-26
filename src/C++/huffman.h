@@ -6,6 +6,7 @@
 #define ITCR_DATOSII_PROYECTOIII_TECFS_SERVER_HUFFMAN_H
 
 #include <string>
+#include <utility>
 #include <vector>
 #include <queue>
 #include <fstream>
@@ -13,13 +14,13 @@ using namespace std;
 
 //Defining Huffman Tree Node
 struct Node {
-    char data;
-    unsigned freq;
+    char data{};
+    unsigned freq{};
     string code;
     Node *left, *right;
 
     Node() {
-        left = right = NULL;
+        left = right = nullptr;
     }
 };
 class huffman {
@@ -30,7 +31,7 @@ private:
 
     string inFileName, outFileName;
 
-    Node *root;
+    Node *root{};
 
     class Compare {
     public:
@@ -79,8 +80,8 @@ public:
     //Constructor
     huffman(string inFileName, string outFileName)
     {
-        this->inFileName = inFileName;
-        this->outFileName = outFileName;
+        this->inFileName = std::move(inFileName);
+        this->outFileName = std::move(outFileName);
         createArr();
     }
     //Compressing input file
