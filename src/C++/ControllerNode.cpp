@@ -13,11 +13,16 @@ void ControllerNode::receiveBook(string Query, string compressedPath, string met
     string bookPath = "../src/Books/book.txt";
     huffman huffman(bookPath, compressedPath);
     huffman.compress();
-    ofstream metadata;
+
+    ifstream currentFile(metafile);
+    json currentObject;
+    currentFile >>currentObject;
     query["Book"]["Info"] = compressedPath;
-    metadata.open(metafile);
-    metadata << query;
-    metadata.close();
+    currentObject["Books"] += query;
+    ofstream writeJson;
+    writeJson.open(metafile);
+    writeJson <<currentObject;
+    writeJson.close();
 }
 
 void ControllerNode::searchBook(string bookName) {

@@ -102,7 +102,7 @@ void TcpServer::getMessage() {
         cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
     }else {
         string name = path + "book.txt";
-        string meta_file = metadata_path + "bookInfo"+ to_string(count) + ".json";
+        string meta_file = metadata_path + "bookInfo.json";
         string compressed_path = path + "compressedBook" + to_string(count) + ".huf";
         ofstream book;
         book.open(name);
