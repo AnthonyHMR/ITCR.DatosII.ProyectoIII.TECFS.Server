@@ -110,14 +110,18 @@ void TcpServer::getMessage() {
                 metadataFile["Books"][i]["Book"]["Info"].get_to(matchBook);
             }
         }
-        string decompressedBook = "../Books/decompressedBook.txt";
+        string decompressedBook = "../src/Books/decompressedBook.txt";
         huffman huffman(matchBook, decompressedBook);
         huffman.decompress();
         ifstream result(decompressedBook);
         string resultSender;
-        result >> resultSender;
-        sendMessage(resultSender);
+        string res;
+        while(getline(result, resultSender)){
+            res.append(resultSender);
+        }
+        sendMessage(res);
         cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
+        cout << res << endl;
     }else {
         string name = path + "book.txt";
         string compressed_path = path + "compressedBook" + to_string(count) + ".huf";
