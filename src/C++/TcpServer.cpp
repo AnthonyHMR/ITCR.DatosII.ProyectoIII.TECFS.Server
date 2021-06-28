@@ -99,10 +99,11 @@ void TcpServer::getMessage() {
     string Query = string(buf, 0, bytesRecv);
     json query = json::parse(Query);
     if (query.contains("Search")) {
+        sendMessage(to_string(this->controllerNode->searchBook(query, metadata_path)));
+    }else if(query.contains("File")){
         cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
     }else {
         string name = path + "book.txt";
-        string meta_file = metadata_path + "bookInfo.json";
         string compressed_path = path + "compressedBook" + to_string(count) + ".huf";
         ofstream book;
         book.open(name);
@@ -110,7 +111,7 @@ void TcpServer::getMessage() {
         query["Book"]["Info"].get_to(book_content);
         book << book_content;
         book.close();
-        this->controllerNode->receiveBook(Query, compressed_path, meta_file);
+        this->controllerNode->receiveBook(Query, compressed_path, metadata_path);
         count++;
     }
 }

@@ -21,7 +21,7 @@ private:
 public:
     ControllerNode();
     void receiveBook(string Query, string fileName, string metafile);
-    void searchBook(string bookName);
+    json searchBook(json query, string metafile);
     void storeBook();
 
 };

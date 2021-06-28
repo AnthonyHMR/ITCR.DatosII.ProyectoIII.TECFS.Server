@@ -19,7 +19,7 @@ private:
     int clientSocket;
     int bytesRecv;
     string path= "../src/Books/";
-    string metadata_path = "../src/Metadata/";
+    string metadata_path = "../src/Metadata/bookInfo.json";
     int count = 1;
     ControllerNode *controllerNode;
 };
