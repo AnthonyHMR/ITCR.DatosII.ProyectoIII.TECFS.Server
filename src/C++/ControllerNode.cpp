@@ -8,18 +8,15 @@ ControllerNode::ControllerNode() {
 
 }
 
-void ControllerNode::receiveBook(string Query, string fileName, string metafile) {
+void ControllerNode::receiveBook(string Query, string compressedPath, string metafile) {
     json query = json::parse(Query);
-    ofstream book;
+    string bookPath = "../src/Books/book.txt";
+    huffman huffman(bookPath, compressedPath);
+    huffman.compress();
     ofstream metadata;
-    string book_content;
-    book.open(fileName);
-    query["Book"]["Info"].get_to(book_content);
-    query["Book"]["Info"] = fileName;
-    book << book_content;
+    query["Book"]["Info"] = compressedPath;
     metadata.open(metafile);
     metadata << query;
-    book.close();
     metadata.close();
 }
 

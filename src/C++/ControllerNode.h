@@ -8,6 +8,7 @@
 #include <iostream>
 #include "nlohmann/json.hpp"
 #include <fstream>
+#include "huffman.h"
 using namespace std;
 using nlohmann::json;
 
