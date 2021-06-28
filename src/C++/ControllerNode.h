@@ -11,8 +11,11 @@
 #include "huffman.h"
 using namespace std;
 using nlohmann::json;
-
+/**
+ * @class Controller node class that stores the books and searches books
+ */
 class ControllerNode {
+
 private:
     string inputBook{};
     string metadata_path = "../src/Metadata/";
@@ -20,9 +23,21 @@ private:
     int index = 0;
 public:
     ControllerNode();
+    /**
+     * @brief function that receives books and separates them into txt file and its metadata
+     * @param Query client's book query
+     * @param fileName book's path
+     * @param metafile metadata's path
+     */
     void receiveBook(string Query, string fileName, string metafile);
+    /**
+     * @brief searching for a book requested by the client
+     * @param query request json from client
+     * @param metafile metadata's path
+     * @return json match of the request
+     */
     json searchBook(json query, string metafile);
-    void storeBook();
+
 
 };
 

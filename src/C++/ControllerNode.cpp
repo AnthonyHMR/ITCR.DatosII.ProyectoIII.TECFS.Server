@@ -62,8 +62,6 @@ json ControllerNode::searchBook(json query, string metafile) {
     }
 }
 
-void ControllerNode::storeBook() {
 
-}
 
 
