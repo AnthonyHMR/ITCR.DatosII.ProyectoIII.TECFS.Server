@@ -101,6 +101,22 @@ void TcpServer::getMessage() {
     if (query.contains("Search")) {
         sendMessage(to_string(this->controllerNode->searchBook(query, metadata_path)));
     }else if(query.contains("File")){
+        ifstream request(metadata_path);
+        json metadataFile;
+        request >> metadataFile;
+        string matchBook;
+        for (int i = 0; metadataFile["Books"].size() != i; i++) {
+            if (metadataFile["Books"][i]["Book"]["ID"] == query["File"]){
+                metadataFile["Books"][i]["Book"]["Info"].get_to(matchBook);
+            }
+        }
+        string decompressedBook = "../Books/decompressedBook.txt";
+        huffman huffman(matchBook, decompressedBook);
+        huffman.decompress();
+        ifstream result(decompressedBook);
+        string resultSender;
+        result >> resultSender;
+        sendMessage(resultSender);
         cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
     }else {
         string name = path + "book.txt";
